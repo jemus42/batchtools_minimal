@@ -34,6 +34,10 @@ vignettes/*.pdf
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
+README.html
 
 # R Environment Variables
 .Renviron
+
+# Ignore registries to avoid accidentally commiting thousands of small files.
+registries
