@@ -9,7 +9,7 @@ Please only use this is a point of entry or for quick experimentation, I don't w
 
 ## Setup Notes
 
-- Only required dependencies here are `batchtools` and `ggplot2`: `install.packages(c("batchtools", "ggplot2"))`
+- Only required dependencies here are `batchtools` and `ggplot2`: `install.packages(c("batchtools", "ggplot2", "ranger"))`
 - `batchtools.conf.R` sets up parallelization for this project only, overriding other config files you might have.
   **Adjust `ncpus` and `max.load` there according to your hardware capabilities!**
 
@@ -19,7 +19,7 @@ Please only use this is a point of entry or for quick experimentation, I don't w
 - Write/wrap your algorithm to be applied on the data in `algorithms.R`.
 - Think.
 - Adjust `run-experiments.R` for your problems/algorithms/parameter settings
-- Run `run-experiments.R`, wait a while. This will be block the R session, so beware!
+- Run `run-experiments.R`, wait a while. This will block the R session, so beware!
 - Hope.
 - Optionally run `monitor-running.R` to check on finished/expired jobs.
 - Retrieve and analyze your results in `analyze-results.R`.

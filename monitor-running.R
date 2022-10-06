@@ -3,6 +3,7 @@
 library(batchtools)
 reg_dir <- "registries/example"
 # Load the registry in non-writable mode to avoid possibly messing something up
+# If the registry changes in some way while jobs are still being submitted bacthtools will stop, so beware
 loadRegistry(reg_dir, writeable = FALSE)
 
 # Overall status --------------------------------------------------------------------------------------------------
