@@ -9,7 +9,7 @@ Please only use this is a point of entry or for quick experimentation, I don't w
 
 ## Setup Notes
 
-- Only required dependencies here are `batchtools` and `ggplot2`: `install.packages(c("batchtools", "ggplot2", "ranger"))`
+- Only required dependencies here are `batchtools`, `ranger` and `ggplot2`: `install.packages(c("batchtools", "ggplot2", "ranger"))`
 - `batchtools.conf.R` sets up parallelization for this project only, overriding other config files you might have.
   **Adjust `ncpus` and `max.load` there according to your hardware capabilities!**
 

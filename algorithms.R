@@ -16,12 +16,18 @@ lm_wrapper <- function(data, job, instance, ...) {
 # Random forest
 rf_wrapper <- function(data, job, instance, ...) {
   # Fit model
-  library(ranger)
-  rf <- ranger(y ~ ., data = instance$train, ...)
+  rf <- ranger::ranger(y ~ ., data = instance$train, ...)
   pred <- predict(rf, instance$test)$predictions
 
   # Return RMSE
   res <- sqrt(mean((pred - instance$test$y)^2))
   names(res) <- "error"
   res
+}
+
+# For debugging job systems
+waitaminute <- function(data, job, instance, s = 0, ...) {
+  if (is.numeric(s) & s >= 0) {
+    Sys.sleep(s)
+  }
 }

@@ -27,6 +27,8 @@ addProblem(name = "sim_binom", fun = sim_binom, seed = 44)
 source("algorithms.R")
 addAlgorithm(name = "lm", fun = lm_wrapper)
 addAlgorithm(name = "rf", fun = rf_wrapper)
+# This is a dummy algorithm that just waits s seconds (for debugging)
+addAlgorithm(name = "wait", fun = waitaminute)
 
 # Experiments -----------------------------------------------------------
 # Define parameter grid for the problems and algorithms.
@@ -34,19 +36,20 @@ addAlgorithm(name = "rf", fun = rf_wrapper)
 prob_design <- list(
   sim_norm = expand.grid(
     n = 100,
-    p = c(10, 50, 100),
+    p = c(10, 50),
     beta = 0.5
   ),
   sim_binom = expand.grid(
     n = 100,
-    p = c(10, 50, 100),
+    p = c(10, 50),
     beta = 0.5
   )
 )
 
 algo_design <- list(
   lm = expand.grid(),
-  rf = expand.grid(num.trees = c(5, 10, 100))
+  rf = expand.grid(num.trees = c(5, 10)),
+  wait = expand.grid(s = 10)
 )
 
 # `repls` defines how often the algorithm will be fit on each problems
@@ -57,7 +60,9 @@ summarizeExperiments()
 
 # Test jobs -----------------------------------------------------------
 # Result of this job will not be saved, this is just for testing
-testJob(id = 1)
+if (interactive()) {
+  testJob(id = 1)
+}
 
 # Submit -----------------------------------------------------------
 # This is only applicable to the BIPS cluster
@@ -70,7 +75,7 @@ if (grepl("node\\d{2}|bipscluster", system("hostname", intern = TRUE))) {
                               max.concurrent.jobs = 40))
 } else {
   # This will run otherwise. By default all jobs will be submitted, use with care.
-  submitJobs()
+  submitJobs(resources = list(measure.memory = TRUE))
 }
 waitForJobs()
 
